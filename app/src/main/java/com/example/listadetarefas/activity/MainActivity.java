@@ -17,17 +17,24 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.listadetarefas.adapter.TarefaAdapter;
 import com.example.listadetarefas.databinding.ActivityMainBinding;
+import com.example.listadetarefas.model.Tarefa;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
  private RecyclerView recyclerLista;
+ private TarefaAdapter tarefaAdapter;
+ private List<Tarefa> listaTarefas = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +59,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarListaTarefas(){
         //listar tarefas
+      Tarefa tarefa1 = new Tarefa ();
+      tarefa1.setNomeTarefa("Ir ao mercado");
+      listaTarefas.add(tarefa1);
 
+        Tarefa tarefa2 = new Tarefa ();
+        tarefa1.setNomeTarefa("Ir a feira");
+        listaTarefas.add(tarefa2);
         /*
         Exibe lista de  tarefas no recyclerview
          */
         //Configurar Adapter
+
+        tarefaAdapter = new TarefaAdapter( listaTarefas );
 
         //Configutar RecyclerLista
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getApplicationContext());

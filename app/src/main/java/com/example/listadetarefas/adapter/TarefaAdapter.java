@@ -6,8 +6,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.listadetarefas.model.Tarefa;
+
+import java.util.List;
+
 public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHolder> {
-    public TarefaAdapter() {
+    private  List<Tarefa> listaTarefas;
+
+    public TarefaAdapter(List<Tarefa> lista ) {
+        this.listaTarefas = lista;
     }
     @NonNull
     @Override
@@ -24,7 +31,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.listaTarefas.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

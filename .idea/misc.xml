@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/drawable/ic_confirmar.xml" value="0.196" />
         <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/layout/activity_adicionar_tarefa.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/layout/content_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/layout/lista_tarefa_adapter.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Alan/AndroidStudioProjects/ListadeTarefas/app/src/main/res/menu/menu_adicionar_tarefa.xml" value="0.18697916666666667" />
       </map>
     </option>
   </component>

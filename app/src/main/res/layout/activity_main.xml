@@ -30,7 +30,7 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_confirmar"
+        app:srcCompat="@drawable/ic_adicionar"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

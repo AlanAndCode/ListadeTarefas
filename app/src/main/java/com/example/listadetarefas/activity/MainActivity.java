@@ -7,6 +7,7 @@ import com.example.listadetarefas.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -19,10 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listadetarefas.adapter.TarefaAdapter;
 import com.example.listadetarefas.databinding.ActivityMainBinding;
+import com.example.listadetarefas.helper.RecyclerItemClickListener;
 import com.example.listadetarefas.model.Tarefa;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -42,6 +45,34 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         recyclerLista = findViewById(R.id.recyclerLista);
+
+        //adicionando evento de clique
+        recyclerLista.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerLista,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Log.i("clique", "onItemClick");
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                                Log.i("clique", "onLongItemclick");
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            }
+                        }
+
+                )
+        );
+
+
+
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -57,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        carregarListaTarefas();
+        super.onStart();
+    }
+
     public void carregarListaTarefas(){
         //listar tarefas
       Tarefa tarefa1 = new Tarefa ();
@@ -64,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
       listaTarefas.add(tarefa1);
 
         Tarefa tarefa2 = new Tarefa ();
-        tarefa1.setNomeTarefa("Ir a feira");
+        tarefa2.setNomeTarefa("Ir a feira");
         listaTarefas.add(tarefa2);
         /*
         Exibe lista de  tarefas no recyclerview
@@ -78,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerLista.setLayoutManager( layoutManager );
         recyclerLista.setHasFixedSize(true);
         recyclerLista.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
-        //recyclerLista.setAdapter( );
+        recyclerLista.setAdapter( tarefaAdapter );
 
 
     }

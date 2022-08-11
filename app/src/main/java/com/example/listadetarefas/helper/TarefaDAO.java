@@ -62,11 +62,12 @@ public class TarefaDAO implements ITarefaDAO {
         Cursor c = le.rawQuery(sql, null);
 
         while (c.moveToNext() ){
-            int columnIndex = c.getColumnIndex("id");
+            int columnIndexId = c.getColumnIndex("id");
+            int columnIndexNome = c.getColumnIndex("nome");
             Tarefa tarefa = new Tarefa();
 
-            Long id = c.getLong( columnIndex );
-            String nomeTarefa = c.getString( columnIndex );
+            Long id = c.getLong( columnIndexId );
+            String nomeTarefa = c.getString( columnIndexNome );
 
 
             tarefa.setNomeTarefa( nomeTarefa );

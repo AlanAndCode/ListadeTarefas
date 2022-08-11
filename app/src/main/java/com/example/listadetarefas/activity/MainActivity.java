@@ -1,5 +1,6 @@
 package com.example.listadetarefas.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -20,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listadetarefas.adapter.TarefaAdapter;
 import com.example.listadetarefas.databinding.ActivityMainBinding;
+import com.example.listadetarefas.helper.DbHelper;
 import com.example.listadetarefas.helper.RecyclerItemClickListener;
+import com.example.listadetarefas.helper.TarefaDAO;
 import com.example.listadetarefas.model.Tarefa;
 
 import android.view.Menu;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //configurando recycler
         recyclerLista = findViewById(R.id.recyclerLista);
 
         //adicionando evento de clique
@@ -96,13 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarListaTarefas(){
         //listar tarefas
-      Tarefa tarefa1 = new Tarefa ();
-      tarefa1.setNomeTarefa("Ir ao mercado");
-      listaTarefas.add(tarefa1);
+      TarefaDAO tarefaDAO = new TarefaDAO( getApplicationContext() );
+        listaTarefas = tarefaDAO.listar();
 
-        Tarefa tarefa2 = new Tarefa ();
-        tarefa2.setNomeTarefa("Ir a feira");
-        listaTarefas.add(tarefa2);
         /*
         Exibe lista de  tarefas no recyclerview
          */

@@ -17,13 +17,21 @@ import com.google.android.material.textfield.TextInputEditText;
 public class AdicionarTarefaActivity extends AppCompatActivity {
 
     private TextInputEditText editTarefa;
-
+    private Tarefa tarefaAtual;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_tarefa);
 
         editTarefa = findViewById(R.id.textTarefa);
+
+        //recuperar tarefa, caso seja ediçao
+        tarefaAtual = (Tarefa) getIntent().getSerializableExtra("tarefaSelecionada");
+
+        //configurar texto par aparecer quando clicado
+        if (tarefaAtual != null){
+            editTarefa.setText( tarefaAtual.getNomeTarefa());
+        }
     }
 
     @Override
@@ -39,12 +47,46 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
             case R.id.itemSalvar:
                 //executa açao para item salvar
                 TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
-                String nomeTarefa = editTarefa.getText().toString();
-                if (!nomeTarefa.isEmpty()){
-                    Tarefa tarefa = new Tarefa();
-                    tarefa.setNomeTarefa( nomeTarefa );
-                    tarefaDAO.salvar( tarefa );
-                    finish();
+                if ( tarefaAtual != null){
+                    String nomeTarefa = editTarefa.getText().toString();
+                    if (!nomeTarefa.isEmpty()){
+                        Tarefa tarefa = new Tarefa();
+                        tarefa.setNomeTarefa( nomeTarefa );
+                        tarefa.setId( tarefaAtual.getId() );
+
+                        //atualizar no banco de dados
+                        if ( tarefaDAO.atualizar(tarefa)){
+                            finish();
+                            Toast.makeText(getApplicationContext(),
+                                    "Sucesso ao salvar tarefa!",
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),
+                                    "Erro ao salvar tarefa!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                }else {//salvar
+                        String nomeTarefa = editTarefa.getText().toString();
+                    if (!nomeTarefa.isEmpty()){
+                        Tarefa tarefa = new Tarefa();
+                        tarefa.setNomeTarefa( nomeTarefa );
+
+                        if(tarefaDAO.salvar( tarefa )){
+                            finish();
+                            Toast.makeText(getApplicationContext(),
+                                    "Sucesso ao salvar tarefa!",
+                                    Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Erro ao salvar tarefa!",
+                                    Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    }
                 }
                 break;
         }
